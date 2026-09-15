@@ -75,7 +75,7 @@
   }
   .topo-info{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(2,minmax(200px,1fr));
     gap:14px;
     width:100%;
     max-width:640px;
@@ -85,8 +85,10 @@
     gap:10px;
     align-items:flex-start;
     font-size:.95rem;
+    text-align:left;
   }
-  .topo-info .info-item .icon{font-size:1.2rem;line-height:1;}
+  .topo-info .info-item .icon{font-size:1.2rem;line-height:1;flex:0 0 auto;}
+  .topo-info .info-item > span:last-child{flex:0 1 auto;}
   .topo-info strong{display:block;color:var(--brand-light);}
   .btn-whatsapp-topo{
     flex:0 0 auto;
