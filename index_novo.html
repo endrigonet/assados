@@ -322,6 +322,7 @@
   .depoimento-card .estrelas{color:#f5a623;margin-bottom:10px;}
   .depoimento-card p.texto{font-style:italic;color:#4a3d33;margin-bottom:14px;}
   .depoimento-card .autor{font-weight:bold;color:var(--brand-dark);}
+  .depoimento-card .autor-tag{font-weight:normal;color:#7a6a5f;}
 
   /* ---------- SEÇÕES ALTERNADAS ---------- */
   #cardapio{background:#fff;}
@@ -377,21 +378,19 @@
       <div class="topo-info">
         <div class="info-item">
           <span class="icon">🕒</span>
-          <span><strong>Horário de Funcionamento</strong>Domingos das 11h30 às 13h30</span>
+          <span><strong>Horário de Funcionamento</strong><span class="js-horario-funcionamento"></span></span>
         </div>
         <div class="info-item">
           <span class="icon">📅</span>
-          <span><strong>Horário de Reservas</strong>Sábados das 9h às 22h | Domingos a partir das 8h</span>
+          <span><strong>Horário de Reservas</strong><span class="js-horario-reservas"></span></span>
         </div>
         <div class="info-item">
           <span class="icon">📍</span>
-          <!-- TODO: substituir pelo endereço real -->
-          <span><strong>Endereço</strong>Rua XXX, nº 000 – Bairro, Cidade – UF</span>
+          <span><strong>Endereço</strong><span class="js-endereco-texto"></span></span>
         </div>
         <div class="info-item">
           <span class="icon">📞</span>
-          <!-- TODO: substituir pelo telefone real -->
-          <span><strong>Telefone</strong>(00) 9999-9999</span>
+          <span><strong>Telefone</strong><span class="js-telefone-texto"></span></span>
         </div>
       </div>
     </div>
@@ -438,45 +437,92 @@
 
     <div class="categorias">
       <button class="active" data-categoria="todos">Todos</button>
+      <button data-categoria="promocoes">Promoções</button>
       <button data-categoria="carnes">Carnes</button>
       <button data-categoria="acompanhamentos">Acompanhamentos</button>
       <button data-categoria="bebidas">Bebidas</button>
-      <button data-categoria="sobremesas">Sobremesas</button>
     </div>
 
-    <!-- TODO: ajustar itens, descrições e preços reais do cardápio -->
     <div class="cardapio-grid" id="cardapioGrid">
-      <div class="item-card" data-categoria="carnes">
-        <div class="item-header"><h3>Picanha na Brasa</h3><span class="preco">R$ 00,00</span></div>
-        <p>Corte nobre grelhado no ponto, servido fatiado.</p>
+      <div class="item-card" data-categoria="promocoes">
+        <div class="item-header"><h3>Kit Frango Assado</h3><span class="preco">R$ 90,00 cada</span></div>
+        <p>Refeição completa para toda a família! Acompanha 1 frango assado suculento, 1 risoto colonial grande e 1 porção grande de maionese caseira feita com ovo cozido. Serve até 4 pessoas. Promoção: ganhe 1 refrigerante Cini 2L (ou troque por Coca-Cola 2L por apenas + R$ 5,00).</p>
+      </div>
+      <div class="item-card" data-categoria="promocoes">
+        <div class="item-header"><h3>Kit Carne Assada</h3><span class="preco">+ R$ 30,00</span></div>
+        <p>Na compra de 1kg ou mais de costela ou carne suína, com mais R$ 30,00 leva um Risoto Grande e uma Maionese Grande.</p>
+      </div>
+      <div class="item-card" data-categoria="promocoes">
+        <div class="item-header"><h3>Risoto + Carne Assada</h3><span class="preco">+ R$ 10,00</span></div>
+        <p>Na compra de 1 frango assado ou acima de 1kg de carne assada, com mais R$ 10,00 leva um Risoto Grande.</p>
       </div>
       <div class="item-card" data-categoria="carnes">
-        <div class="item-header"><h3>Costela Assada</h3><span class="preco">R$ 00,00</span></div>
-        <p>Costela bovina assada lentamente, macia e suculenta.</p>
+        <div class="item-header"><h3>Costela Bovina</h3><span class="preco">R$ 85,00 / kg</span></div>
+        <p>Costela bovina temperada, macia e suculenta, marinada em um blend de ervas e ingredientes naturais que penetram até o osso. Assada lentamente deixando-a dourada, com aroma inconfundível e maciez extrema, que desmancha na boca a cada pedaço.</p>
       </div>
       <div class="item-card" data-categoria="carnes">
-        <div class="item-header"><h3>Frango Assado</h3><span class="preco">R$ 00,00</span></div>
-        <p>Frango temperado e assado na brasa.</p>
+        <div class="item-header"><h3>Costela Suína</h3><span class="preco">R$ 73,00 / kg</span></div>
+        <p>Costela suína, marinada em temperos e ingredientes naturais que realçam seu sabor original. Assada no ponto certo, resulta em uma carne dourada, extremamente macia e suculenta, que solta do osso com facilidade.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Copa-lombo</h3><span class="preco">R$ 73,00 / kg</span></div>
+        <p>Corte nobre de carne suína temperado e marinado em um blend de ingredientes naturais. Assado no ponto certo, para garantir suculência, maciez e sabor incomparável.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Coxa com Sobrecoxa</h3><span class="preco">R$ 50,00 / kg</span></div>
+        <p>Coxa e sobrecoxa marinadas em temperos naturais que penetram profundamente na carne, mantendo-a macia, suculenta e cheia de sabor por dentro.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Frango Assado Sem Recheio</h3><span class="preco">R$ 57,00 cada</span></div>
+        <p>Frango marinado em temperos naturais que penetram profundamente na carne, mantendo-a macia, suculenta e cheia de sabor por dentro. Serve 4 pessoas.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Frango Assado Com Recheio</h3><span class="preco">R$ 60,00 cada</span></div>
+        <p>Frango marinado em temperos naturais que penetram profundamente na carne, mantendo-a macia, suculenta e cheia de sabor por dentro, recheado com farofa úmida de miúdos. A escolha perfeita para o seu almoço. Serve 4 pessoas.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Linguiça</h3><span class="preco">R$ 3,50 a unidade</span></div>
+        <p>Linguiça toscana assada na churrasqueira, com toque defumado. Também disponível em porção com 5 unidades por R$ 16,00 (R$ 3,20 cada) ou porção com 10 unidades por R$ 30,00 (R$ 3,00 cada).</p>
       </div>
       <div class="item-card" data-categoria="acompanhamentos">
-        <div class="item-header"><h3>Farofa Especial</h3><span class="preco">R$ 00,00</span></div>
-        <p>Farofa crocante com bacon e temperos da casa.</p>
+        <div class="item-header"><h3>Maionese Pequena</h3><span class="preco">R$ 13,00 cada</span></div>
+        <p>Maionese caseira cremosa de batata feita com ovo cozido, garantindo a textura e o sabor caseiro que todos amam. Serve até 2 pessoas.</p>
       </div>
       <div class="item-card" data-categoria="acompanhamentos">
-        <div class="item-header"><h3>Arroz Carreteiro</h3><span class="preco">R$ 00,00</span></div>
-        <p>Arroz com carne desfiada e temperos regionais.</p>
+        <div class="item-header"><h3>Maionese Grande</h3><span class="preco">R$ 19,00 cada</span></div>
+        <p>Maionese caseira cremosa de batata feita com ovo cozido, garantindo a textura e o sabor caseiro que todos amam. Serve até 4 pessoas.</p>
+      </div>
+      <div class="item-card" data-categoria="acompanhamentos">
+        <div class="item-header"><h3>Risoto Pequeno</h3><span class="preco">R$ 10,00 cada</span></div>
+        <p>Risoto colonial de frango, cremoso e reconfortante, feito com frango assado desfiado e tempero caseiro especial. Perfeito como acompanhamento ou para ser a estrela do seu almoço. Simplesmente delicioso. Serve até 2 pessoas.</p>
+      </div>
+      <div class="item-card" data-categoria="acompanhamentos">
+        <div class="item-header"><h3>Risoto Grande</h3><span class="preco">R$ 18,00 cada</span></div>
+        <p>Risoto colonial de frango, cremoso e reconfortante, feito com frango assado desfiado e tempero caseiro especial. Perfeito como acompanhamento ou para ser a estrela do seu almoço. Simplesmente delicioso. Serve até 4 pessoas.</p>
+      </div>
+      <div class="item-card" data-categoria="acompanhamentos">
+        <div class="item-header"><h3>Batata Assada</h3><span class="preco">R$ 10,00 a porção</span></div>
+        <p>Batata miúda acompanhada de cebola e alho, assada no forno junto com os sucos e temperos do frango. Dourada por fora e macia por dentro.</p>
       </div>
       <div class="item-card" data-categoria="bebidas">
-        <div class="item-header"><h3>Refrigerante Lata</h3><span class="preco">R$ 00,00</span></div>
-        <p>Diversos sabores, gelados.</p>
+        <div class="item-header"><h3>Coca-Cola 2L</h3><span class="preco">R$ 12,00</span></div>
+        <p>Normal ou Sem Açúcar.</p>
       </div>
       <div class="item-card" data-categoria="bebidas">
-        <div class="item-header"><h3>Suco Natural</h3><span class="preco">R$ 00,00</span></div>
-        <p>Feito na hora, diversas frutas.</p>
+        <div class="item-header"><h3>Fanta Laranja 2L</h3><span class="preco">R$ 10,00</span></div>
+        <p>Normal ou Sem Açúcar.</p>
       </div>
-      <div class="item-card" data-categoria="sobremesas">
-        <div class="item-header"><h3>Doce de Leite Caseiro</h3><span class="preco">R$ 00,00</span></div>
-        <p>Receita tradicional da casa.</p>
+      <div class="item-card" data-categoria="bebidas">
+        <div class="item-header"><h3>Sprite 2L</h3><span class="preco">R$ 10,00</span></div>
+        <p>Normal ou Sem Açúcar.</p>
+      </div>
+      <div class="item-card" data-categoria="bebidas">
+        <div class="item-header"><h3>Guaraná Antarctica 2L</h3><span class="preco">R$ 10,00</span></div>
+        <p>Normal ou Sem Açúcar.</p>
+      </div>
+      <div class="item-card" data-categoria="bebidas">
+        <div class="item-header"><h3>Cini 2L</h3><span class="preco">R$ 8,00</span></div>
+        <p>Diversos sabores. Normal ou Sem Açúcar.</p>
       </div>
     </div>
   </div>
@@ -530,24 +576,22 @@
       <div class="endereco-info">
         <div class="info-item">
           <span class="icon">📍</span>
-          <!-- TODO: substituir pelo endereço real -->
-          <span><strong>Endereço</strong>Rua XXX, nº 000 – Bairro, Cidade – UF</span>
+          <span><strong>Endereço</strong><span class="js-endereco-texto"></span></span>
         </div>
         <div class="info-item">
           <span class="icon">📞</span>
-          <span><strong>Telefone</strong>(00) 9999-9999</span>
+          <span><strong>Telefone</strong><span class="js-telefone-texto"></span></span>
         </div>
         <div class="info-item">
           <span class="icon">🕒</span>
-          <span><strong>Funcionamento</strong>Domingos das 11h30 às 13h30</span>
+          <span><strong>Funcionamento</strong><span class="js-horario-funcionamento"></span></span>
         </div>
-        <!-- TODO: o link "Como chegar" usa o mesmo endereço configurado em enderecoEndpoint no script -->
         <a href="#" class="btn-como-chegar js-como-chegar" target="_blank" rel="noopener">Como Chegar</a>
       </div>
       <div class="endereco-mapa">
-        <!-- TODO: substitua "q=" pelo endereço real ou pelas coordenadas do local -->
         <iframe
-          src="https://www.google.com/maps?q=Rua+XXX,+Cidade&output=embed"
+          class="js-mapa-iframe"
+          src=""
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           title="Mapa de localização"></iframe>
       </div>
@@ -560,29 +604,24 @@
   <div class="container">
     <h2 class="section-title">Depoimentos</h2>
     <p class="section-subtitle">O que nossos clientes dizem</p>
-    <!-- TODO: substituir por depoimentos reais de clientes -->
+
     <div class="depoimentos-grid">
       <div class="depoimento-card">
         <div class="estrelas">★★★★★</div>
-        <p class="texto">"Melhor assado da região! A carne é sempre macia e suculenta."</p>
-        <div class="autor">Maria S.</div>
+        <p class="texto">"Simplesmente a melhor costela que eu comi, ela se desmancha na boca, o tempero excelente, estão de parabéns."</p>
+        <div class="autor">Paola Thibes Grottker</div>
       </div>
       <div class="depoimento-card">
         <div class="estrelas">★★★★★</div>
-        <p class="texto">"Pedido fácil pelo WhatsApp e retirada super rápida. Recomendo!"</p>
-        <div class="autor">João P.</div>
-      </div>
-      <div class="depoimento-card">
-        <div class="estrelas">★★★★★</div>
-        <p class="texto">"Atendimento nota 10 e comida deliciosa. Já virou tradição de domingo!"</p>
-        <div class="autor">Ana L.</div>
+        <p class="texto">"Ótimo atendimento e o frango assado e a costela são excelentes."</p>
+        <div class="autor">Norton Nader <span class="autor-tag">· Local Guide</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; <span id="ano"></span> Assados. Todos os direitos reservados.</p>
+  <p>&copy; <span id="ano"></span> Assados do Endrigo. Todos os direitos reservados.</p>
 </footer>
 
 <!-- ======================= BOTÃO FLUTUANTE WHATSAPP ======================= -->
@@ -593,17 +632,27 @@
 
 <script>
   // ===================== CONFIGURAÇÕES (edite aqui) =====================
-  // TODO: informe o número de WhatsApp completo com DDI+DDD, ex: "5511999999999"
-  const whatsappNumero = "5500999999999";
+  const whatsappNumero = "554130497963";
   const whatsappMensagem = "Olá! Gostaria de fazer um pedido.";
-  // TODO: informe o endereço para o botão "Como Chegar" (Google Maps)
-  const enderecoParaMapa = "Rua XXX, nº 000, Bairro, Cidade - UF";
+  const telefoneExibicao = "(41) 3049-7963";
+  const enderecoParaMapa = "Rua Angelina Braga Cortezzi, 853, Santa Felicidade, Curitiba - PR";
+  const horarioFuncionamento = "Domingos das 11h30 às 13h30";
+  const horarioReservas = "Sábados das 9h às 22h | Domingos a partir das 8h";
 
+  // Preenche todos os lugares que usam essas informações
   const linkWhatsapp = `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(whatsappMensagem)}`;
   document.querySelectorAll(".js-whatsapp-link").forEach(el => el.href = linkWhatsapp);
 
   const linkComoChegar = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoParaMapa)}`;
   document.querySelectorAll(".js-como-chegar").forEach(el => el.href = linkComoChegar);
+
+  const linkMapaEmbed = `https://www.google.com/maps?q=${encodeURIComponent(enderecoParaMapa)}&output=embed`;
+  document.querySelectorAll(".js-mapa-iframe").forEach(el => el.src = linkMapaEmbed);
+
+  document.querySelectorAll(".js-telefone-texto").forEach(el => el.textContent = telefoneExibicao);
+  document.querySelectorAll(".js-endereco-texto").forEach(el => el.textContent = enderecoParaMapa);
+  document.querySelectorAll(".js-horario-funcionamento").forEach(el => el.textContent = horarioFuncionamento);
+  document.querySelectorAll(".js-horario-reservas").forEach(el => el.textContent = horarioReservas);
 
   document.getElementById("ano").textContent = new Date().getFullYear();
 
