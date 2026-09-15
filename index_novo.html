@@ -23,8 +23,6 @@
     color:var(--text);
     background:var(--bg);
     line-height:1.5;
-    overflow-x:hidden;
-    max-width:100vw;
   }
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;display:block;}
@@ -43,6 +41,11 @@
   }
 
   /* ---------- HEADER / TOPO ---------- */
+  .topo-fixo{
+    position:sticky;
+    top:0;
+    z-index:60;
+  }
   header.topo{
     background:linear-gradient(135deg,var(--brand-dark),#4a2a18);
     color:#fff;
@@ -102,12 +105,17 @@
   }
   .btn-whatsapp-topo:hover{transform:translateY(-2px);}
 
+  @media (max-width:800px){
+    header.topo{padding:12px 20px;}
+    .topo-inner{justify-content:center;}
+    .topo-logo img{width:64px;height:64px;margin-bottom:0;}
+    .topo-info,
+    .btn-whatsapp-topo{display:none;}
+  }
+
   /* ---------- NAV ---------- */
   nav.menu-nav{
     background:#fff;
-    position:sticky;
-    top:0;
-    z-index:50;
     box-shadow:0 2px 10px rgba(0,0,0,.08);
   }
   nav.menu-nav ul{
@@ -369,6 +377,7 @@
 <body>
 
 <!-- ======================= TOPO ======================= -->
+<div class="topo-fixo">
 <header class="topo" id="topo">
   <div class="topo-inner">
     <div class="topo-logo">
@@ -393,10 +402,6 @@
       </div>
     </div>
 
-    <a href="#" class="btn-whatsapp-topo js-whatsapp-link" target="_blank" rel="noopener">
-      <svg viewBox="0 0 32 32" width="22" height="22" fill="#fff"><path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.258.594 4.377 1.63 6.213L3.2 28.8l6.77-1.777A12.74 12.74 0 0 0 16 28.8c7.06 0 12.8-5.74 12.8-12.8s-5.74-12.8-12.799-12.8Zm0 23.273a10.4 10.4 0 0 1-5.31-1.454l-.38-.226-4.017 1.055 1.073-3.917-.248-.402a10.43 10.43 0 0 1-1.618-5.53c0-5.78 4.703-10.482 10.5-10.482 5.797 0 10.5 4.702 10.5 10.482 0 5.78-4.703 10.474-10.5 10.474Zm5.755-7.845c-.315-.158-1.863-.92-2.152-1.026-.289-.105-.5-.158-.71.158-.21.316-.816 1.026-1 1.237-.184.21-.368.237-.684.079-.315-.158-1.33-.49-2.534-1.564-.937-.836-1.57-1.868-1.754-2.184-.184-.316-.02-.487.138-.645.142-.14.316-.368.474-.552.158-.184.21-.316.316-.526.105-.21.052-.395-.026-.553-.079-.158-.71-1.71-.973-2.343-.257-.617-.518-.534-.71-.544l-.605-.011c-.21 0-.552.079-.842.395-.289.316-1.104 1.079-1.104 2.632s1.13 3.053 1.288 3.263c.158.21 2.226 3.4 5.395 4.767.754.325 1.343.52 1.802.665.757.241 1.446.207 1.99.126.607-.09 1.863-.762 2.126-1.498.263-.737.263-1.368.184-1.499-.079-.132-.289-.21-.605-.368Z"/></svg>
-      <span>Peça pelo WhatsApp</span>
-    </a>
   </div>
 </header>
 
@@ -410,6 +415,7 @@
     <li><a href="#depoimentos">Depoimentos</a></li>
   </ul>
 </nav>
+</div>
 
 <!-- ======================= CARROSSEL ======================= -->
 <!-- Fotos carregadas de assets/carrossel/ - substitua os arquivos foto1..foto6 pelas suas fotos reais -->
