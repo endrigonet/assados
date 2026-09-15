@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assados | Peça pelo WhatsApp</title>
+<meta name="description" content="Assados artesanais. Faça seu pedido pelo WhatsApp e retire no local.">
+<style>
+  :root{
+    --brand-dark:#2b1810;
+    --brand:#c0392b;
+    --brand-light:#ff8c42;
+    --whatsapp:#25D366;
+    --text:#2b1810;
+    --bg:#fffaf5;
+    --card:#ffffff;
+    --shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.5;
+  }
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  section{padding:60px 20px;}
+  .container{max-width:1100px;margin:0 auto;}
+  h2.section-title{
+    text-align:center;
+    font-size:2rem;
+    color:var(--brand-dark);
+    margin-bottom:8px;
+  }
+  .section-subtitle{
+    text-align:center;
+    color:#7a6a5f;
+    margin-bottom:36px;
+  }
+
+  /* ---------- HEADER / TOPO ---------- */
+  header.topo{
+    background:linear-gradient(135deg,var(--brand-dark),#4a2a18);
+    color:#fff;
+    padding:24px 20px 32px;
+  }
+  .topo-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .topo-logo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    flex:1 1 320px;
+  }
+  .topo-logo img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    margin-bottom:16px;
+  }
+  .topo-info{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+    width:100%;
+    max-width:640px;
+  }
+  .topo-info .info-item{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-size:.95rem;
+  }
+  .topo-info .info-item .icon{font-size:1.2rem;line-height:1;}
+  .topo-info strong{display:block;color:var(--brand-light);}
+  .btn-whatsapp-topo{
+    flex:0 0 auto;
+    align-self:center;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--whatsapp);
+    color:#fff;
+    padding:14px 22px;
+    border-radius:50px;
+    font-weight:bold;
+    box-shadow:var(--shadow);
+    white-space:nowrap;
+    transition:transform .2s ease;
+  }
+  .btn-whatsapp-topo:hover{transform:translateY(-2px);}
+
+  /* ---------- NAV ---------- */
+  nav.menu-nav{
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+  }
+  nav.menu-nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:4px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  nav.menu-nav a{
+    display:block;
+    padding:14px 16px;
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--brand-dark);
+  }
+  nav.menu-nav a:hover{color:var(--brand);}
+
+  /* ---------- CARROSSEL ---------- */
+  .carrossel{
+    position:relative;
+    max-width:1100px;
+    margin:40px auto 0;
+    padding:0 20px;
+  }
+  .carrossel-viewport{
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9;
+    background:#000;
+  }
+  .carrossel-track{
+    display:flex;
+    height:100%;
+    transition:transform .6s ease;
+  }
+  .carrossel-track img{
+    width:100%;
+    flex:0 0 100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .carrossel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    border:none;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    font-size:1.3rem;
+    cursor:pointer;
+  }
+  .carrossel-btn.prev{left:12px;}
+  .carrossel-btn.next{right:12px;}
+  .carrossel-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:16px;
+  }
+  .carrossel-dots button{
+    width:10px;height:10px;border-radius:50%;
+    border:none;background:#ddd;cursor:pointer;
+  }
+  .carrossel-dots button.active{background:var(--brand);}
+
+  /* ---------- CARDÁPIO ---------- */
+  .categorias{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:32px;
+  }
+  .categorias button{
+    padding:10px 18px;
+    border-radius:50px;
+    border:2px solid var(--brand);
+    background:transparent;
+    color:var(--brand);
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .categorias button.active,
+  .categorias button:hover{
+    background:var(--brand);
+    color:#fff;
+  }
+  .cardapio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+  }
+  .item-card{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .item-card .item-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+  }
+  .item-card h3{font-size:1.05rem;color:var(--brand-dark);}
+  .item-card .preco{font-weight:bold;color:var(--brand);white-space:nowrap;}
+  .item-card p{font-size:.9rem;color:#665a51;}
+
+  /* ---------- COMO FUNCIONA ---------- */
+  .como-funciona-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+  }
+  .passo-card{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:28px 22px;
+    text-align:center;
+  }
+  .passo-card .numero{
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--brand);
+    color:#fff;
+    font-weight:bold;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px;
+    font-size:1.2rem;
+  }
+  .passo-card h3{margin-bottom:10px;color:var(--brand-dark);}
+  .passo-card p{color:#665a51;font-size:.92rem;}
+
+  /* ---------- PAGAMENTO ---------- */
+  .pagamento-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:18px;
+  }
+  .pagamento-card{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:24px 12px;
+    text-align:center;
+  }
+  .pagamento-card .icon{font-size:2rem;margin-bottom:10px;}
+  .pagamento-card span{font-weight:600;color:var(--brand-dark);}
+
+  /* ---------- ENDEREÇO ---------- */
+  .endereco-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    align-items:stretch;
+  }
+  .endereco-info{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    justify-content:center;
+  }
+  .endereco-info .info-item{display:flex;gap:12px;align-items:flex-start;}
+  .endereco-info strong{display:block;color:var(--brand-dark);}
+  .btn-como-chegar{
+    align-self:flex-start;
+    margin-top:8px;
+    background:var(--brand);
+    color:#fff;
+    padding:12px 22px;
+    border-radius:50px;
+    font-weight:bold;
+  }
+  .endereco-mapa{
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    min-height:280px;
+  }
+  .endereco-mapa iframe{width:100%;height:100%;border:0;min-height:280px;}
+  @media (max-width:800px){
+    .endereco-wrap{grid-template-columns:1fr;}
+  }
+
+  /* ---------- DEPOIMENTOS ---------- */
+  .depoimentos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+  }
+  .depoimento-card{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:24px;
+  }
+  .depoimento-card .estrelas{color:#f5a623;margin-bottom:10px;}
+  .depoimento-card p.texto{font-style:italic;color:#4a3d33;margin-bottom:14px;}
+  .depoimento-card .autor{font-weight:bold;color:var(--brand-dark);}
+
+  /* ---------- SEÇÕES ALTERNADAS ---------- */
+  #cardapio{background:#fff;}
+  #como-funciona{background:var(--bg);}
+  #pagamento{background:#fff;}
+  #endereco{background:var(--bg);}
+  #depoimentos{background:#fff;}
+
+  footer{
+    background:var(--brand-dark);
+    color:#fff;
+    text-align:center;
+    padding:26px 20px;
+    font-size:.9rem;
+  }
+
+  /* ---------- BOTÃO FLUTUANTE ---------- */
+  .whatsapp-float{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--whatsapp);
+    color:#fff;
+    padding:14px 20px;
+    border-radius:50px;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+    font-weight:bold;
+    animation:pulse 2.2s infinite;
+  }
+  .whatsapp-float svg{width:24px;height:24px;flex:0 0 auto;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,.5);}
+    70%{box-shadow:0 0 0 14px rgba(37,211,102,0);}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+  }
+  @media (max-width:480px){
+    .whatsapp-float span{display:none;}
+    .whatsapp-float{padding:14px;border-radius:50%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= TOPO ======================= -->
+<header class="topo" id="topo">
+  <div class="topo-inner">
+    <div class="topo-logo">
+      <img src="assets/logo.svg" alt="Logo Assados">
+      <div class="topo-info">
+        <div class="info-item">
+          <span class="icon">🕒</span>
+          <span><strong>Horário de Funcionamento</strong>Domingos das 11h30 às 13h30</span>
+        </div>
+        <div class="info-item">
+          <span class="icon">📅</span>
+          <span><strong>Horário de Reservas</strong>Sábados das 9h às 22h | Domingos a partir das 8h</span>
+        </div>
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <!-- TODO: substituir pelo endereço real -->
+          <span><strong>Endereço</strong>Rua XXX, nº 000 – Bairro, Cidade – UF</span>
+        </div>
+        <div class="info-item">
+          <span class="icon">📞</span>
+          <!-- TODO: substituir pelo telefone real -->
+          <span><strong>Telefone</strong>(00) 9999-9999</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="btn-whatsapp-topo js-whatsapp-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" width="22" height="22" fill="#fff"><path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.258.594 4.377 1.63 6.213L3.2 28.8l6.77-1.777A12.74 12.74 0 0 0 16 28.8c7.06 0 12.8-5.74 12.8-12.8s-5.74-12.8-12.799-12.8Zm0 23.273a10.4 10.4 0 0 1-5.31-1.454l-.38-.226-4.017 1.055 1.073-3.917-.248-.402a10.43 10.43 0 0 1-1.618-5.53c0-5.78 4.703-10.482 10.5-10.482 5.797 0 10.5 4.702 10.5 10.482 0 5.78-4.703 10.474-10.5 10.474Zm5.755-7.845c-.315-.158-1.863-.92-2.152-1.026-.289-.105-.5-.158-.71.158-.21.316-.816 1.026-1 1.237-.184.21-.368.237-.684.079-.315-.158-1.33-.49-2.534-1.564-.937-.836-1.57-1.868-1.754-2.184-.184-.316-.02-.487.138-.645.142-.14.316-.368.474-.552.158-.184.21-.316.316-.526.105-.21.052-.395-.026-.553-.079-.158-.71-1.71-.973-2.343-.257-.617-.518-.534-.71-.544l-.605-.011c-.21 0-.552.079-.842.395-.289.316-1.104 1.079-1.104 2.632s1.13 3.053 1.288 3.263c.158.21 2.226 3.4 5.395 4.767.754.325 1.343.52 1.802.665.757.241 1.446.207 1.99.126.607-.09 1.863-.762 2.126-1.498.263-.737.263-1.368.184-1.499-.079-.132-.289-.21-.605-.368Z"/></svg>
+      <span>Peça pelo WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<!-- ======================= NAV ======================= -->
+<nav class="menu-nav">
+  <ul>
+    <li><a href="#cardapio">Cardápio</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+    <li><a href="#pagamento">Pagamento</a></li>
+    <li><a href="#endereco">Endereço</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+  </ul>
+</nav>
+
+<!-- ======================= CARROSSEL ======================= -->
+<!-- Fotos carregadas de assets/carrossel/ - substitua os arquivos foto1..foto6 pelas suas fotos reais -->
+<div class="carrossel">
+  <div class="carrossel-viewport">
+    <div class="carrossel-track" id="carrosselTrack">
+      <img src="assets/carrossel/foto1.svg" alt="Foto do cardápio 1">
+      <img src="assets/carrossel/foto2.svg" alt="Foto do cardápio 2">
+      <img src="assets/carrossel/foto3.svg" alt="Foto do cardápio 3">
+      <img src="assets/carrossel/foto4.svg" alt="Foto do cardápio 4">
+    </div>
+    <button class="carrossel-btn prev" id="carrosselPrev" aria-label="Foto anterior">&#10094;</button>
+    <button class="carrossel-btn next" id="carrosselNext" aria-label="Próxima foto">&#10095;</button>
+  </div>
+  <div class="carrossel-dots" id="carrosselDots"></div>
+</div>
+
+<!-- ======================= CARDÁPIO ======================= -->
+<section id="cardapio">
+  <div class="container">
+    <h2 class="section-title">Cardápio</h2>
+    <p class="section-subtitle">Escolha uma categoria para ver os itens</p>
+
+    <div class="categorias">
+      <button class="active" data-categoria="todos">Todos</button>
+      <button data-categoria="carnes">Carnes</button>
+      <button data-categoria="acompanhamentos">Acompanhamentos</button>
+      <button data-categoria="bebidas">Bebidas</button>
+      <button data-categoria="sobremesas">Sobremesas</button>
+    </div>
+
+    <!-- TODO: ajustar itens, descrições e preços reais do cardápio -->
+    <div class="cardapio-grid" id="cardapioGrid">
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Picanha na Brasa</h3><span class="preco">R$ 00,00</span></div>
+        <p>Corte nobre grelhado no ponto, servido fatiado.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Costela Assada</h3><span class="preco">R$ 00,00</span></div>
+        <p>Costela bovina assada lentamente, macia e suculenta.</p>
+      </div>
+      <div class="item-card" data-categoria="carnes">
+        <div class="item-header"><h3>Frango Assado</h3><span class="preco">R$ 00,00</span></div>
+        <p>Frango temperado e assado na brasa.</p>
+      </div>
+      <div class="item-card" data-categoria="acompanhamentos">
+        <div class="item-header"><h3>Farofa Especial</h3><span class="preco">R$ 00,00</span></div>
+        <p>Farofa crocante com bacon e temperos da casa.</p>
+      </div>
+      <div class="item-card" data-categoria="acompanhamentos">
+        <div class="item-header"><h3>Arroz Carreteiro</h3><span class="preco">R$ 00,00</span></div>
+        <p>Arroz com carne desfiada e temperos regionais.</p>
+      </div>
+      <div class="item-card" data-categoria="bebidas">
+        <div class="item-header"><h3>Refrigerante Lata</h3><span class="preco">R$ 00,00</span></div>
+        <p>Diversos sabores, gelados.</p>
+      </div>
+      <div class="item-card" data-categoria="bebidas">
+        <div class="item-header"><h3>Suco Natural</h3><span class="preco">R$ 00,00</span></div>
+        <p>Feito na hora, diversas frutas.</p>
+      </div>
+      <div class="item-card" data-categoria="sobremesas">
+        <div class="item-header"><h3>Doce de Leite Caseiro</h3><span class="preco">R$ 00,00</span></div>
+        <p>Receita tradicional da casa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= COMO FUNCIONA ======================= -->
+<section id="como-funciona">
+  <div class="container">
+    <h2 class="section-title">Como Funciona</h2>
+    <p class="section-subtitle">Simples, rápido e prático</p>
+    <div class="como-funciona-grid">
+      <div class="passo-card">
+        <div class="numero">1</div>
+        <h3>Horário de Funcionamento</h3>
+        <p>Atendemos aos domingos das 11h30 às 13h30. Reservas aos sábados das 9h às 22h e domingos a partir das 8h.</p>
+      </div>
+      <div class="passo-card">
+        <div class="numero">2</div>
+        <h3>Como Fazer seu Pedido</h3>
+        <p>Clique no botão do WhatsApp, envie os itens desejados, quantidade e o melhor horário para retirada.</p>
+      </div>
+      <div class="passo-card">
+        <div class="numero">3</div>
+        <h3>Como Retirar seu Pedido</h3>
+        <p>Retire pessoalmente em nosso endereço, no horário combinado durante a conversa no WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FORMAS DE PAGAMENTO ======================= -->
+<section id="pagamento">
+  <div class="container">
+    <h2 class="section-title">Formas de Pagamento</h2>
+    <p class="section-subtitle">Aceitamos diversas formas de pagamento</p>
+    <div class="pagamento-grid">
+      <div class="pagamento-card"><div class="icon">💵</div><span>Dinheiro</span></div>
+      <div class="pagamento-card"><div class="icon">📲</div><span>PIX</span></div>
+      <div class="pagamento-card"><div class="icon">💳</div><span>Cartão de Débito</span></div>
+      <div class="pagamento-card"><div class="icon">💳</div><span>Cartão de Crédito</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ENDEREÇO ======================= -->
+<section id="endereco">
+  <div class="container">
+    <h2 class="section-title">Endereço</h2>
+    <p class="section-subtitle">Venha nos visitar ou retirar seu pedido</p>
+    <div class="endereco-wrap">
+      <div class="endereco-info">
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <!-- TODO: substituir pelo endereço real -->
+          <span><strong>Endereço</strong>Rua XXX, nº 000 – Bairro, Cidade – UF</span>
+        </div>
+        <div class="info-item">
+          <span class="icon">📞</span>
+          <span><strong>Telefone</strong>(00) 9999-9999</span>
+        </div>
+        <div class="info-item">
+          <span class="icon">🕒</span>
+          <span><strong>Funcionamento</strong>Domingos das 11h30 às 13h30</span>
+        </div>
+        <!-- TODO: o link "Como chegar" usa o mesmo endereço configurado em enderecoEndpoint no script -->
+        <a href="#" class="btn-como-chegar js-como-chegar" target="_blank" rel="noopener">Como Chegar</a>
+      </div>
+      <div class="endereco-mapa">
+        <!-- TODO: substitua "q=" pelo endereço real ou pelas coordenadas do local -->
+        <iframe
+          src="https://www.google.com/maps?q=Rua+XXX,+Cidade&output=embed"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa de localização"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= DEPOIMENTOS ======================= -->
+<section id="depoimentos">
+  <div class="container">
+    <h2 class="section-title">Depoimentos</h2>
+    <p class="section-subtitle">O que nossos clientes dizem</p>
+    <!-- TODO: substituir por depoimentos reais de clientes -->
+    <div class="depoimentos-grid">
+      <div class="depoimento-card">
+        <div class="estrelas">★★★★★</div>
+        <p class="texto">"Melhor assado da região! A carne é sempre macia e suculenta."</p>
+        <div class="autor">Maria S.</div>
+      </div>
+      <div class="depoimento-card">
+        <div class="estrelas">★★★★★</div>
+        <p class="texto">"Pedido fácil pelo WhatsApp e retirada super rápida. Recomendo!"</p>
+        <div class="autor">João P.</div>
+      </div>
+      <div class="depoimento-card">
+        <div class="estrelas">★★★★★</div>
+        <p class="texto">"Atendimento nota 10 e comida deliciosa. Já virou tradição de domingo!"</p>
+        <div class="autor">Ana L.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; <span id="ano"></span> Assados. Todos os direitos reservados.</p>
+</footer>
+
+<!-- ======================= BOTÃO FLUTUANTE WHATSAPP ======================= -->
+<a href="#" class="whatsapp-float js-whatsapp-link" target="_blank" rel="noopener" aria-label="Faça seu pedido pelo WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.258.594 4.377 1.63 6.213L3.2 28.8l6.77-1.777A12.74 12.74 0 0 0 16 28.8c7.06 0 12.8-5.74 12.8-12.8s-5.74-12.8-12.799-12.8Zm0 23.273a10.4 10.4 0 0 1-5.31-1.454l-.38-.226-4.017 1.055 1.073-3.917-.248-.402a10.43 10.43 0 0 1-1.618-5.53c0-5.78 4.703-10.482 10.5-10.482 5.797 0 10.5 4.702 10.5 10.482 0 5.78-4.703 10.474-10.5 10.474Zm5.755-7.845c-.315-.158-1.863-.92-2.152-1.026-.289-.105-.5-.158-.71.158-.21.316-.816 1.026-1 1.237-.184.21-.368.237-.684.079-.315-.158-1.33-.49-2.534-1.564-.937-.836-1.57-1.868-1.754-2.184-.184-.316-.02-.487.138-.645.142-.14.316-.368.474-.552.158-.184.21-.316.316-.526.105-.21.052-.395-.026-.553-.079-.158-.71-1.71-.973-2.343-.257-.617-.518-.534-.71-.544l-.605-.011c-.21 0-.552.079-.842.395-.289.316-1.104 1.079-1.104 2.632s1.13 3.053 1.288 3.263c.158.21 2.226 3.4 5.395 4.767.754.325 1.343.52 1.802.665.757.241 1.446.207 1.99.126.607-.09 1.863-.762 2.126-1.498.263-.737.263-1.368.184-1.499-.079-.132-.289-.21-.605-.368Z"/></svg>
+  <span>Faça seu pedido</span>
+</a>
+
+<script>
+  // ===================== CONFIGURAÇÕES (edite aqui) =====================
+  // TODO: informe o número de WhatsApp completo com DDI+DDD, ex: "5511999999999"
+  const whatsappNumero = "5500999999999";
+  const whatsappMensagem = "Olá! Gostaria de fazer um pedido.";
+  // TODO: informe o endereço para o botão "Como Chegar" (Google Maps)
+  const enderecoParaMapa = "Rua XXX, nº 000, Bairro, Cidade - UF";
+
+  const linkWhatsapp = `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(whatsappMensagem)}`;
+  document.querySelectorAll(".js-whatsapp-link").forEach(el => el.href = linkWhatsapp);
+
+  const linkComoChegar = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoParaMapa)}`;
+  document.querySelectorAll(".js-como-chegar").forEach(el => el.href = linkComoChegar);
+
+  document.getElementById("ano").textContent = new Date().getFullYear();
+
+  // ===================== CARROSSEL =====================
+  (function initCarrossel(){
+    const track = document.getElementById("carrosselTrack");
+    const slides = Array.from(track.children);
+    const dotsWrap = document.getElementById("carrosselDots");
+    const prevBtn = document.getElementById("carrosselPrev");
+    const nextBtn = document.getElementById("carrosselNext");
+    let index = 0;
+    let timer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      if (i === 0) dot.classList.add("active");
+      dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
+      dot.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function update(){
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    }
+    function goTo(i){
+      index = (i + slides.length) % slides.length;
+      update();
+      resetTimer();
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    nextBtn.addEventListener("click", next);
+    prevBtn.addEventListener("click", prev);
+    resetTimer();
+  })();
+
+  // ===================== FILTRO DE CARDÁPIO =====================
+  (function initCardapio(){
+    const botoes = document.querySelectorAll(".categorias button");
+    const itens = document.querySelectorAll("#cardapioGrid .item-card");
+
+    botoes.forEach(btn => {
+      btn.addEventListener("click", () => {
+        botoes.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const categoria = btn.dataset.categoria;
+        itens.forEach(item => {
+          item.style.display = (categoria === "todos" || item.dataset.categoria === categoria) ? "" : "none";
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
