@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página em Construção</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #ff8c42, #ff3c38);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+
+    .icon {
+      font-size: 5rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .progress-bar {
+      margin-top: 30px;
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      width: 40%;
+      background: #fff;
+      border-radius: 5px;
+      animation: loading 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes loading {
+      0% { width: 20%; }
+      100% { width: 80%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">🔥🍖</div>
+    <h1>Página em Construção</h1>
+    <p>Estamos preparando algo especial. Volte em breve!</p>
+    <div class="progress-bar"><span></span></div>
+  </div>
+</body>
+</html>
