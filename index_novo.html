@@ -51,15 +51,10 @@
 </div>
 
 <!-- ======================= CARROSSEL ======================= -->
-<!-- Fotos carregadas de assets/carrossel/ - substitua os arquivos foto1..foto6 pelas suas fotos reais -->
+<!-- Fotos lidas de assets/carrossel/fotos.js - para adicionar/remover fotos, edite esse arquivo -->
 <div class="carrossel">
   <div class="carrossel-viewport">
-    <div class="carrossel-track" id="carrosselTrack">
-      <img src="assets/carrossel/foto1.svg" alt="Foto do cardápio 1">
-      <img src="assets/carrossel/foto2.svg" alt="Foto do cardápio 2">
-      <img src="assets/carrossel/foto3.svg" alt="Foto do cardápio 3">
-      <img src="assets/carrossel/foto4.svg" alt="Foto do cardápio 4">
-    </div>
+    <div class="carrossel-track" id="carrosselTrack"></div>
     <button class="carrossel-btn prev" id="carrosselPrev" aria-label="Foto anterior">&#10094;</button>
     <button class="carrossel-btn next" id="carrosselNext" aria-label="Próxima foto">&#10095;</button>
   </div>
@@ -103,7 +98,7 @@
       </div>
       <div class="item-card" data-categoria="carnes">
         <div class="item-header"><h3>Copa-lombo</h3><span class="preco">R$ 73,00 / kg</span></div>
-        <p>Corte nobre de carne suína temperado e marinado em um blend de ingredientes naturais. Assado no ponto certo, para garantir suculência, maciez e sabor incomparável.</p>
+        <p>Corte nobre de carne suína com gordura entremeada que deixa a carne mais suculenta e macia, temperado e marinado em um blend de ingredientes naturais. Assado no ponto certo, para garantir suculência, maciez e sabor incomparável.</p>
       </div>
       <div class="item-card" data-categoria="carnes">
         <div class="item-header"><h3>Coxa com Sobrecoxa</h3><span class="preco">R$ 50,00 / kg</span></div>
@@ -114,7 +109,7 @@
         <p>Frango marinado em temperos naturais que penetram profundamente na carne, mantendo-a macia, suculenta e cheia de sabor por dentro. Serve 4 pessoas.</p>
       </div>
       <div class="item-card" data-categoria="carnes">
-        <div class="item-header"><h3>Frango Assado Com Recheio</h3><span class="preco">R$ 60,00 cada</span></div>
+        <div class="item-header"><h3>Frango Assado Recheado</h3><span class="preco">R$ 60,00 cada</span></div>
         <p>Frango marinado em temperos naturais que penetram profundamente na carne, mantendo-a macia, suculenta e cheia de sabor por dentro, recheado com farofa úmida de miúdos. A escolha perfeita para o seu almoço. Serve 4 pessoas.</p>
       </div>
       <div class="item-card" data-categoria="carnes">
@@ -271,6 +266,7 @@
   <span>Faça seu pedido</span>
 </a>
 
+<script src="assets/carrossel/fotos.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -62,10 +62,23 @@ document.getElementById("ano").textContent = new Date().getFullYear();
 // ===================== CARROSSEL =====================
 (function initCarrossel(){
   const track = document.getElementById("carrosselTrack");
-  const slides = Array.from(track.children);
   const dotsWrap = document.getElementById("carrosselDots");
   const prevBtn = document.getElementById("carrosselPrev");
   const nextBtn = document.getElementById("carrosselNext");
+  const nomesFotos = window.fotosCarrossel || [];
+
+  track.innerHTML = nomesFotos.map((nome, i) => `<img src="assets/carrossel/${nome}" alt="Foto ${i + 1} do Assados">`).join("");
+  const slides = Array.from(track.children);
+
+  if (!slides.length) {
+    document.querySelector(".carrossel").style.display = "none";
+    return;
+  }
+  if (slides.length === 1) {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  }
+
   let index = 0;
   let timer;
 
@@ -91,7 +104,7 @@ document.getElementById("ano").textContent = new Date().getFullYear();
   function prev(){ goTo(index - 1); }
   function resetTimer(){
     clearInterval(timer);
-    timer = setInterval(next, 5000);
+    if (slides.length > 1) timer = setInterval(next, 5000);
   }
 
   nextBtn.addEventListener("click", next);

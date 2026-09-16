@@ -13,3 +13,8 @@ Exemplos:
 - "Risoto + Carne Assada" → `risoto-carne-assada.jpg` (o "+" também vira hífen)
 
 Itens sem imagem correspondente não exibem o ícone e continuam normais.
+
+Tamanho recomendado: proporção quadrada (1:1), pelo menos 400x400px
+(a prévia é exibida em um quadrado de 200x200px, o `object-fit:cover` corta
+o excesso caso a imagem não seja quadrada). Prefira arquivos leves, até ~200KB.
+
